@@ -43,7 +43,9 @@ function update() {
       text.innerHTML = item;
 
       if (item == new_todo) {
-        li.classList.add("animate__animated", "animate__backInLeft");
+        li.classList.add("animate__animated", "animate__bounceInUp");
+        // REMOVE CLASS WHEN FINISH ANIMATION
+        setTimeout(()=>{li.classList.remove("animate__animated", "animate__bounceInUp")}, 1000);
         new_todo = null;
       }
       div.appendChild(button);
@@ -58,7 +60,7 @@ function update() {
 function deleteItem(counter) {
   clicked_li = document.querySelectorAll(`[data-id="${counter}"]`)[0]
     .parentElement.parentElement;
-  clicked_li.classList.add("animate__animated", "animate__backOutRight");
+  clicked_li.classList.add("animate__animated", "animate__bounceOutRight");
   setTimeout(() => {
     chrome.storage.sync.get({ todos: Array() }, (result) => {
       let todos = result["todos"];
